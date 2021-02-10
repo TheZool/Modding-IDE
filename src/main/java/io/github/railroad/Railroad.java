@@ -4,13 +4,17 @@ import io.github.railroad.config.Configs;
 import io.github.railroad.drp.DiscordRichPresenceManager;
 import io.github.railroad.objects.ConfirmWindow;
 import io.github.railroad.objects.RailroadTopMenu;
+import io.github.railroad.objects.ExplorerTreeItem;
 import io.github.railroad.utility.UIUtils;
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 public class Railroad extends Application {
 
@@ -48,7 +52,12 @@ public class Railroad extends Application {
 	public void createComponents(Node topMenu, Stage window) {
 		BorderPane borderPane = new BorderPane();
 		borderPane.setTop(topMenu);
+		borderPane.setLeft(createTreeView());
 		this.mainScene = new Scene(borderPane);
+	}
+
+	private TreeView<File> createTreeView() {
+		return new TreeView<>(new ExplorerTreeItem(new File("C:\\")));
 	}
 
 	public Configs getConfig() {
